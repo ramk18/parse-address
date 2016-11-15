@@ -528,6 +528,13 @@
   function capitalize(s){
     return s && s[0].toUpperCase() + s.slice(1);
   }
+  
+  function rename_key(obj, name, newname){
+    if(obj.hasOwnProperty(name)){
+      obj[newname] = obj[name];
+      delete obj[name];
+    }
+  }
   function keys(o){
     return Object.keys(o);
   }
@@ -720,6 +727,11 @@
     if(parsed.zip){
       parsed.zip = XRegExp.replace(parsed.zip,/^(.{5}).*/,'$1');
     }
+    
+    rename_key(parsed, "type", "street_type");
+    rename_key(parsed, "number", "street_number");
+    rename_key(parsed, "sec_unit_type", "apt_type");
+    rename_key(parsed, "sec_unit_num", "apt_number");
     return parsed;
   };
 
