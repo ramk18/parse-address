@@ -732,6 +732,7 @@
     rename_key(parsed, "number", "street_number");
     rename_key(parsed, "sec_unit_type", "apt_type");
     rename_key(parsed, "sec_unit_num", "apt_number");
+    rename_key(parsed, "street", "street_name");
     return parsed;
   };
 
