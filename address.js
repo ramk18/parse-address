@@ -697,6 +697,18 @@
       if(parts[k])
         parsed[key] = parts[k].trim().replace(/[^\w\s\-\#\&]/,'');
     });
+    
+    if(parsed.type){
+      if(Street_Type[parsed.type.toLowerCase()]){
+        parsed.type = Street_Type[parsed.type.toLowerCase()];
+      }
+    }
+
+    if(parsed.state){
+      if(State_Code[parsed.state.toLowerCase()]){
+        parsed.state = State_Code[parsed.state.toLowerCase()];
+      }
+    }
 
     if(parsed.city){
       parsed.city = XRegExp.replace(parsed.city,
