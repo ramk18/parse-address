@@ -649,10 +649,10 @@
         '+Addr_Match.sec_unit_type_unnumbered+'           \n\
       )';
 
-    Addr_Match.city_and_state = '                       \n\
+   Addr_Match.city_and_state = '                       \n\
       (?:                                               \n\
-        (?<city>[^\\d,]+?)\\W+                          \n\
-        (?<state>'+Addr_Match.state+')                  \n\
+        (?<city>[^\\d,]+) \\W*                        \n\
+        (?<state>'+Addr_Match.state+')?                  \n\
       )                                                 \n\
       ';
 
