@@ -665,7 +665,7 @@
       ^                                                 \n\
       [^\\w\\#]*                                        \n\
       ('+Addr_Match.number+')\\W*                       \n\
-      (?:'+Addr_Match.fraction+'\\W*)?                  \n\
+      (?:(?<fraction_0>'+Addr_Match.fraction+')\\W*)?   \n\
          '+Addr_Match.street+'\\W+                      \n\
       (?:'+Addr_Match.sec_unit+')?\\W*          #fix2   \n\
          '+Addr_Match.place+'                           \n\
@@ -678,7 +678,7 @@
       \\s*                                                    \n\
       (?:'+Addr_Match.sec_unit+sep+')?                        \n\
       (?:'+Addr_Match.number+')?\\W*                          \n\
-      (?:'+Addr_Match.fraction+'\\W*)?                        \n\
+      (?:(?<fraction_0>'+Addr_Match.fraction+')\\W*)?         \n\
          '+Addr_Match.street+sep+'                            \n\
       (?:'+Addr_Match.sec_unit.replace(/_\d/g,'$&1')+sep+')?  \n\
       (?:'+Addr_Match.place+')?                               \n\
@@ -733,6 +733,9 @@
     rename_key(parsed, "sec_unit_type", "apt_type");
     rename_key(parsed, "sec_unit_num", "apt_number");
     rename_key(parsed, "street", "street_name");
+    rename_key(parsed, "fraction", "street_number_half");
+    rename_key(parsed, "prefix", "street_prefix");
+    rename_key(parsed, "suffix", "street_suffix");
     return parsed;
   };
 
