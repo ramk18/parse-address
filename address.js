@@ -528,7 +528,7 @@
   function capitalize(s){
     return s && s[0].toUpperCase() + s.slice(1);
   }
-  
+
   function rename_key(obj, name, newname){
     if(obj.hasOwnProperty(name)){
       obj[newname] = obj[name];
@@ -621,6 +621,7 @@
         |stop                                         \n\
         |tra?i?le?r                                   \n\
         |box)(?![a-z]                                 \n\
+        |box)(?![a-z]                                 \n\
       )                                               \n\
       ';
 
@@ -647,6 +648,9 @@
         )                                                 \n\
         |                                                 \n\
         '+Addr_Match.sec_unit_type_unnumbered+'           \n\
+        |                                                 \n\
+        (?:(?<sec_unit_num_2>[\\w-]+)\\W*                 \n\
+        )                                               \n\
       )';
 
    Addr_Match.city_and_state = '                       \n\
@@ -702,9 +706,10 @@
         return;
       var key = isFinite(k.split('_').pop())? k.split('_').slice(0,-1).join('_'): k ;
       if(parts[k])
-        parsed[key] = parts[k].trim().replace(/[^\w\s\-\#\&]/,'');
+        parsed[key] = parts[k].trim().replace(/[^\w\s\-\#\&\/]/,'');
     });
-    
+
+
     if(parsed.type){
       if(Street_Type[parsed.type.toLowerCase()]){
         parsed.type = Street_Type[parsed.type.toLowerCase()];
@@ -727,7 +732,7 @@
     if(parsed.zip){
       parsed.zip = XRegExp.replace(parsed.zip,/^(.{5}).*/,'$1');
     }
-    
+
     rename_key(parsed, "type", "street_type");
     rename_key(parsed, "number", "street_number");
     rename_key(parsed, "sec_unit_type", "apt_type");
@@ -745,6 +750,7 @@
   };
   parser.parseInformalAddress = function(address){
     var parts = XRegExp.exec(address,Addr_Match.informal_address);
+    console.log(parts);
     return parser.normalize_address(parts);
   };
   parser.parseLocation = function(address){
