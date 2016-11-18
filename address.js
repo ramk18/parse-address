@@ -680,9 +680,9 @@
     Addr_Match.informal_address = XRegExp('                   \n\
       ^                                                       \n\
       \\s*                                                    \n\
-      (?:'+Addr_Match.sec_unit+sep+')?                        \n\
       (?:'+Addr_Match.number+')?\\W*                          \n\
       (?:(?<fraction_0>'+Addr_Match.fraction+')\\W*)?         \n\
+      (?:'+Addr_Match.sec_unit+')?\\W*          #fix2        \n\
          '+Addr_Match.street+sep+'                            \n\
       (?:'+Addr_Match.sec_unit.replace(/_\d/g,'$&1')+sep+')?  \n\
       (?:'+Addr_Match.place+')?                               \n\
@@ -750,7 +750,6 @@
   };
   parser.parseInformalAddress = function(address){
     var parts = XRegExp.exec(address,Addr_Match.informal_address);
-    console.log(parts);
     return parser.normalize_address(parts);
   };
   parser.parseLocation = function(address){
