@@ -678,7 +678,7 @@
       [^\\w\\#]*                                        \n\
       (' + Addr_Match.number + ')\\W*                       \n\
       (?:(?<fraction_0>' + Addr_Match.fraction + ')\\W*)?   \n\
-         ' + Addr_Match.street + '\\W+                      \n\
+         ' + Addr_Match.street + '\\W*                      \n\
       (?:' + Addr_Match.sec_unit + ')?\\W*          #fix2   \n\
          ' + Addr_Match.place + '                           \n\
       \\W*$', 'ix');
